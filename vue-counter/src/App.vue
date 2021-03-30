@@ -1,27 +1,34 @@
 <template>
   <div>
-    <LoginPage/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import LoginPage from './views/Login'
-
+ 
 export default {
   name: 'App',
-  components: {
-    LoginPage
-  }
 }
 </script>
 
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+body {
+    background-color: lightgreen;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 </style>
