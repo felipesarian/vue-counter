@@ -5,7 +5,7 @@
             <h2>Login</h2>
             <input v-model="username" type='text' name='username' id='username' placeholder="username" class='input-style'/>
             <input v-model="password" type='password' name='password' id='password' placeholder="password" class='input-style'/>
-            <Button text='Entrar' @click="this.loginClick()"/>
+            <Button text='Entrar' @click="loginClick()"/>
             <router-link to='/register'>
                 <Button text='Cadastrar-se'/>
             </router-link>
@@ -15,7 +15,7 @@
 
 <script>
 import Button from '../components/Button'
-import verifyUser from '../services/firebase'
+import { verifyUser } from '../services/firebase'
 
 export default {
     name: 'LoginPage',
@@ -34,7 +34,7 @@ export default {
             try {
                 const userOk = await verifyUser(user.username, user.password)
                 if(userOk){
-                    console.log(user)
+                    this.$router.push({name: 'counter'})
                 }
             } catch (error) {
                 console.error(error)

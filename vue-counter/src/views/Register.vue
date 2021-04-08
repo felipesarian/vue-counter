@@ -14,6 +14,7 @@
 
 <script>
 import Button from '../components/Button'
+import { verifyEmail, createUser } from '../services/firebase'
 
 export default {
     name: 'Register',
@@ -29,13 +30,19 @@ export default {
         }
     },
      methods: {
-        registerClick(){
-            if(this.checkPasswords()){
-                const newUser = {email: this.email, username: this.username, password: this.password}
-                console.log(newUser)
-                this.$router.push({name: 'counter'})
-            } else{
-                alert('As senhas nao coincidem')
+        async registerClick(){
+            try {
+                const emailOk = await verifyEmail(this.email)
+                console.log(emailOk)
+                if(this.checkPasswords() && !emailOk){
+                    const newUser = {email: this.email, username: this.username, password: this.password}
+                    await createUser(newUser)
+                    this.$router.push({name: 'counter'})
+                } else{
+                    alert('Há algo de errado')
+                } 
+            } catch (error) {
+                console.log(error)
             }
         },
         checkPasswords(){
